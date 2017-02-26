@@ -1,0 +1,46 @@
+-----------------------------------
+Copper Plane Current Analysis Program
+Version 0.3.0.1
+Time: Fri Jan 25 07:12:56 2008
+GPL Version 2.0
+-----------------------------------
+Number of processors: 2
+Max number of OMP threads: 2
+-----------------------------------
+Reading image:
+C:/Dev-Cpp/development/idc2d_src_0_2_3_1214/idc2d_src_0_2_3_1214/idc2d-test-cases/test-sinter.bmp
+Image extents in pixels: 500 wide x 120 high
+Allocating memory...
+Image check:
+  Source pixel count  = 5500
+  Sink pixel count    = 5000
+  FR-4 pixel count    = 6380
+  Metal 1 pixel count = 7251
+  Metal 2 pixel count = 14325
+  Metal 3 pixel count = 9794
+  Metal 4 pixel count = 11750
+  Unknown pixel count = 0
+Number of threads: 2
+Simulation parameters:
+  Max. iterations           = 10000
+  Cutoff                    = 1e-016
+  Pixel dimensions          = 1000 x 1000 µm (39.3701 x 39.3701 mil)
+  Image dimensions          = 500 x 120 mm (19.685 x 4.72441 in)
+  Layer thickness           = 34.0571 µm (1.34083 mil)
+  Source voltage            = 0.1 V
+  Metal 1 pixel conductance = 2010.45,2010.45 S
+  Metal 2 pixel conductance = 2089.39,2089.39 S
+  Metal 3 pixel conductance = 1548.05,1548.05 S
+  Metal 4 pixel conductance = 270.294,270.294 S
+  Total iteration count     = 1256
+
+  Total supply current      =       264.8679  A
+  Effective DC resistance   =   0.0003775468  Ohms
+  Maximal pixel current     =       9.291426  A
+  Minimum pixel current     =              0  A
+  Max pixel current (X)     =       5.317573  A
+  Min pixel current (X)     =              0  A
+  Max pixel current (Y)     =       9.291426  A
+  Min pixel current (Y)     =              0  A
+Finished in 3.593750 s
+-----------------------------------

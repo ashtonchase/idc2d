@@ -1,0 +1,42 @@
+CXX         = g++
+EXEEXT		=
+.SUFFIXES: .o .c .cpp .cxx .h $(EXEEXT)
+
+RES   = i_current_private.res
+RC    = i_current_private.rc
+OBJS  = browser_log.o button_callbacks.o i_current-2.o i_dc.o  main.o o_image.o Fl_Image_Display.o
+SRCS  = browser_log.cpp button_callbacks.cpp i_current-2.cxx i_dc.cpp main.cpp o_image.cpp Fl_Image_Display.cxx
+LIBS  = -lXft -lpthread -lm -lXext -lX11  -L/usr/lib/fltk-1.1 -lfltk -lfltk_images -lpng -lz -ljpeg
+#LIBS = -lXft -lgomp -lpthread -lm -lXext -lX11 -L/usr/lib/fltk-1.1 -lfltk -lfltk_images -lpng -lz -ljpeg
+INCS  = -I/usr/include/fltk-1.1 -I/usr/include/freetype2 -I/usr/include/libpng
+DEFS  =
+BIN   = icd2d$(EXEEXT)
+LDFLAGS = -pthread
+#LDFLAGS = -pthread -fopenmp
+CXXFLAGS = $(INCS) $(DEFS) $(LDFLAGS) -O2
+
+RM = rm -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+tar:
+	tar cvf icd2d.tar icd2d
+	gzip icd2d.tar
+
+clean: clean-custom
+	echo Cleaning...
+	${RM} $(OBJS) $(BIN)
+
+$(BIN): $(OBJS)
+	echo Linking $@  
+	$(CXX) $(LDFLAGS) -o $@ $(OBJS) $(LIBS)
+
+.c.o:
+	echo Compiling $<...  
+	$(CXX) $(CXXFLAGS) -c $<
+
+.cxx.o:
+	echo Compiling $<...  
+	$(CXX) $(CXXFLAGS) -c $<

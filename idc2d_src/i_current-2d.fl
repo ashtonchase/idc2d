@@ -1,0 +1,1048 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0107 
+header_name {.h} 
+code_name {.cxx}
+decl {\#include <stdio.h>} {} 
+
+decl {\#include <string.h>} {} 
+
+decl {\#include "material_database.h"} {} 
+
+decl {\#include "i_current_private.h"} {} 
+
+decl {\#include "button_callbacks.h"} {} 
+
+Function {make_window()} {open
+} {
+  Fl_Window main_panel {
+    label {Copper Plane Current Analysis} open
+    xywh {651 57 880 649} type Double when 0 resizable size_range {880 645 0 0} visible
+  } {
+    Fl_Progress ProgBar {
+      label Activity
+      xywh {514 29 210 20} align 4
+    }
+    Fl_Menu_Bar {} {
+      xywh {0 0 880 24} labeltype NO_LABEL align 5
+    } {
+      Submenu {} {
+        label File
+        xywh {0 0 100 20}
+      } {
+        MenuItem {} {
+          label {&Quit}
+          callback {exit(0);}
+          xywh {0 0 100 20} shortcut 0x40071
+        }
+      }
+      Submenu {} {
+        label Options open
+        xywh {0 0 100 20}
+      } {
+        MenuItem {} {
+          label Configure
+          callback {config_window->show();}
+          xywh {0 0 100 20}
+        }
+      }
+      Submenu {} {
+        label Help open
+        xywh {5 5 100 20}
+      } {
+        MenuItem {} {
+          label About
+          callback {about_window->show();}
+          xywh {0 0 100 20}
+        }
+      }
+    }
+    Fl_Tabs {} {open
+      xywh {5 30 870 610} box UP_BOX align 0 resizable
+    } {
+      Fl_Group group_input {
+        label Input
+        xywh {5 55 870 585}
+      } {
+        Fl_Group input_panel {open
+          xywh {705 70 170 560}
+        } {
+          Fl_Box box_source {
+            label {Current Source}
+            xywh {725 202 120 35} box UP_BOX color 2 align 5
+          }
+          Fl_Box box_sink {
+            label {Current Sink}
+            xywh {725 257 120 35} box UP_BOX color 4 align 5
+          }
+          Fl_Box box_substrate {
+            label Substrate
+            xywh {725 312 120 35} box UP_BOX color 0 align 5
+          }
+          Fl_Box box_material1 {
+            xywh {725 392 120 35} box UP_BOX color 1 align 21
+          }
+          Fl_Box box_material2 {
+            label {Material 2}
+            tooltip Undefined xywh {725 451 65 23} box UP_BOX color 53 selection_color 0 align 5
+          }
+          Fl_Box box_material3 {
+            label {Material 3}
+            tooltip Undefined xywh {725 489 65 25} box UP_BOX color 53 selection_color 0 align 5
+          }
+          Fl_Box box_material4 {
+            label {Material 4}
+            tooltip Undefined xywh {725 530 65 28} box UP_BOX color 33 align 5
+          }
+          Fl_Button btn_open_image {
+            label {&Open image}
+            callback {fc_btn_open_image();} selected
+            xywh {720 71 95 24} shortcut 0x4006f labelsize 12
+          }
+          Fl_Button btn_check {
+            label {Chec&k}
+            callback {fc_btn_check();}
+            xywh {720 106 95 23} shortcut 0x4006b labelsize 12 deactivate
+          }
+          Fl_Button btn_open_cfg {
+            label {Open configuration}
+            callback {fc_btn_open_cfg();}
+            tooltip {Reads bitmap (.BMP) file.} xywh {715 575 130 24} labelsize 12
+          }
+          Fl_Button btn_save_cfg {
+            label {Save configuration}
+            callback {fc_btn_save_cfg();}
+            xywh {715 605 130 24} labelsize 12
+          }
+          Fl_Box {} {
+            label {Material-Color Definitions}
+            xywh {715 144 140 424} box THIN_DOWN_FRAME color 32 align 149
+          }
+          Fl_Button {} {
+            label Edit
+            callback {source_edit_window->show();}
+            xywh {790 210 45 20} align 16
+          }
+          Fl_Button pick_source {
+            label Pick
+            callback {if ( o->value()== 0 ) {
+copper_plane_s->mode(FL_IMAGE_CLICK);
+clear_picks();o->value(1);
+}
+else {
+copper_plane_s->mode(FL_IMAGE_PAN);
+clear_picks();
+}}
+            xywh {735 210 45 20} color 53 selection_color 0 align 16
+          }
+          Fl_Button {} {
+            label Edit
+            callback {sink_edit_window->show();}
+            xywh {790 265 45 20} align 16
+          }
+          Fl_Button pick_sink {
+            label Pick
+            callback {if ( o->value()== 0 ) {
+copper_plane_s->mode(FL_IMAGE_CLICK);
+clear_picks();o->value(1);
+}
+else {
+copper_plane_s->mode(FL_IMAGE_PAN);
+clear_picks();
+}}
+            xywh {735 265 45 20} color 53 selection_color 32 align 16
+          }
+          Fl_Button {} {
+            label Edit
+            callback {substrate_edit_window->show();}
+            xywh {790 320 45 20} align 16
+          }
+          Fl_Button pick_substr {
+            label Pick
+            callback {if ( o->value()== 0 ) {
+copper_plane_s->mode(FL_IMAGE_CLICK);
+clear_picks();o->value(1);
+}
+else {
+copper_plane_s->mode(FL_IMAGE_PAN);
+clear_picks();
+}}
+            xywh {735 320 45 20} color 53 selection_color 32 align 16
+          }
+          Fl_Button {} {
+            label Edit
+            callback {material1_edit_window->show();}
+            xywh {790 400 45 20} align 16
+          }
+          Fl_Button pick_material1 {
+            label Pick
+            callback {if ( o->value()== 0 ) {
+copper_plane_s->mode(FL_IMAGE_CLICK);
+clear_picks();o->value(1);
+}
+else {
+copper_plane_s->mode(FL_IMAGE_PAN);
+clear_picks();
+}}
+            xywh {735 400 45 20} selection_color 0 align 16
+          }
+          Fl_Choice choice_material_1 {
+            label Material
+            callback {cb_metal_chosen((Fl_Choice*)o);}
+            xywh {725 370 120 20} down_box BORDER_BOX align 5
+            code0 {o->menu(menu_choice_material);}
+            code1 {o->value(5); // Index into copper}
+          } {}
+          Fl_Button {} {
+            label Edit
+            callback {additional_edit_window->show();}
+            xywh {799 490 40 23} align 16
+          }
+          Fl_Button pick_material2 {
+            label Pick
+            callback {if ( o->value()== 0 ) {
+copper_plane_s->mode(FL_IMAGE_CLICK);
+clear_picks();o->value(1);
+}
+else {
+copper_plane_s->mode(FL_IMAGE_PAN);
+clear_picks();
+}}
+            xywh {740 455 35 15} box THIN_UP_BOX color 53 selection_color 0 labelsize 11 align 16
+          }
+          Fl_Button pick_material3 {
+            label Pick
+            callback {if ( o->value()== 0 ) {
+copper_plane_s->mode(FL_IMAGE_CLICK);
+clear_picks();o->value(1);
+}
+else {
+copper_plane_s->mode(FL_IMAGE_PAN);
+clear_picks();
+}}
+            xywh {740 494 35 15} box THIN_UP_BOX color 53 selection_color 0 labelsize 11 align 16
+          }
+          Fl_Button pick_material4 {
+            label Pick
+            callback {if ( o->value()== 0 ) {
+copper_plane_s->mode(FL_IMAGE_CLICK);
+clear_picks();o->value(1);
+}
+else {
+copper_plane_s->mode(FL_IMAGE_PAN);
+clear_picks();
+}}
+            xywh {740 537 35 15} box THIN_UP_BOX color 53 selection_color 0 labelsize 11 align 16
+          }
+        }
+        Fl_Group copper_plane_s {
+          callback {cb_capture_color(o);}
+          xywh {15 70 685 560} box DOWN_BOX resizable
+          code0 {\#include "Fl_Image_Display.H"}
+          class Fl_Image_Display
+        } {}
+      }
+      Fl_Group group_analyze {
+        label Analyze open
+        xywh {5 55 870 585} hide
+      } {
+        Fl_Group {} {open
+          xywh {740 70 120 560}
+        } {
+          Fl_Button btn_analyze {
+            label {A&nalyze}
+            callback {fc_btn_analyze();}
+            xywh {740 85 120 24} shortcut 0x4006e labelsize 12 deactivate
+          }
+          Fl_Button btn_show {
+            label {Sho&w}
+            callback {fc_btn_show();}
+            xywh {740 115 120 24} shortcut 0x40077 labelsize 12 deactivate
+          }
+          Fl_Value_Input input_max_iter {
+            label {Max. iterations}
+            xywh {740 160 120 24} labelsize 12 align 5 minimum 1 maximum 50000 step 1 value 10000 textfont 4 textsize 12
+          }
+          Fl_Value_Input input_cutoff {
+            label Cutoff
+            xywh {740 205 120 24} labelsize 12 align 5 value 1e-016 textfont 4 textsize 12
+          }
+          Fl_Choice choice_cu_thickness {
+            label {Layer thickness} open
+            xywh {740 250 120 24} box THIN_UP_BOX down_box BORDER_BOX labelsize 12 align 5 textsize 12
+            code0 {o->menu(menu_choice_cu_thickness);}
+          } {}
+          Fl_Spinner spinner_threads {
+            label Threads
+            xywh {800 280 60 24} labelsize 12 textfont 4 textsize 12
+          }
+          Fl_Button btn_save_log {
+            label {Save log}
+            callback {fc_btn_save_log();}
+            xywh {740 310 120 24} shortcut 0x8006c labelsize 12
+          }
+          Fl_Button btn_qsave_log {
+            label {Quick Save log}
+            callback {fc_btn_qsave_log();}
+            xywh {740 346 120 24} shortcut 0x8006c labelsize 12
+          }
+          Fl_Box {} {
+            xywh {740 505 120 125} labeltype NO_LABEL resizable
+          }
+          Fl_Value_Input source_voltage {
+            label {Source Voltage}
+            xywh {775 411 50 24} align 1 step 0.01 value 0.1
+          }
+          Fl_Value_Output initial_temp_out {
+            label {Deg. C}
+            callback {initial_temp->value(o->value());}
+            xywh {780 566 45 24} align 5 minimum -50 maximum 200 step 0.1 value 20
+          }
+          Fl_Dial initial_temp {
+            label Temperature
+            callback {initial_temp_out->value(o->value());}
+            xywh {765 470 70 70} type Line align 1 minimum -50 maximum 200 step 1 value 20
+          }
+        }
+        Fl_Browser main_log {
+          label {Computation Log}
+          xywh {15 80 715 550} type Multi labelsize 12 align 5 textfont 4 textsize 12 resizable
+        }
+      }
+      Fl_Group group_output {
+        label Output
+        xywh {5 55 870 585} hide deactivate
+      } {
+        Fl_Group {} {open
+          xywh {740 70 125 560}
+        } {
+          Fl_Choice choice_colormap {
+            label Colormap
+            callback {fc_choice_colormap();}
+            xywh {740 95 120 24} down_box BORDER_BOX labelsize 12 align 5 textsize 12
+          } {
+            MenuItem {} {
+              label Default
+              xywh {0 0 34 24} labelsize 12
+            }
+            MenuItem {} {
+              label Gray
+              xywh {0 0 34 24} labelsize 12
+            }
+            MenuItem {} {
+              label Jet
+              xywh {0 0 34 24} labelsize 12
+            }
+            MenuItem {} {
+              label Hot
+              xywh {0 0 34 24} labelsize 12
+            }
+            MenuItem {} {
+              label Cold
+              xywh {0 0 34 24} labelsize 12
+            }
+          }
+          Fl_Choice choice_show {
+            label Show
+            callback {fc_choice_show();} open
+            xywh {740 135 120 24} down_box BORDER_BOX labelsize 12 align 5 textsize 12
+          } {
+            MenuItem {} {
+              label {Current density}
+              xywh {10 10 34 24} labelsize 12
+            }
+            MenuItem {} {
+              label {Current density X}
+              xywh {10 10 34 24} labelsize 12
+            }
+            MenuItem {} {
+              label {Current density Y}
+              xywh {10 10 34 24} labelsize 12
+            }
+            MenuItem {} {
+              label {Current X vs Y}
+              xywh {10 10 34 24} labelsize 12
+            }
+            MenuItem {} {
+              label Voltage
+              xywh {0 0 34 24}
+            }
+          }
+          Fl_Button btn_save_image {
+            label {&Save image}
+            callback {fc_btn_save_image();}
+            tooltip {Save current image} xywh {740 210 120 24} shortcut 0x40073 labelsize 12
+          }
+          Fl_Button btn_save_data {
+            label {Save &data}
+            callback {fc_btn_save_data();}
+            xywh {740 240 120 24} shortcut 0x40064 labelsize 12
+          }
+          Fl_Value_Output out_R {
+            label R
+            xywh {740 295 33 24} labelsize 12 labelcolor 1 align 1 maximum 0 textfont 4 textsize 12 textcolor 1
+          }
+          Fl_Value_Output out_G {
+            label G
+            xywh {780 295 33 24} labelsize 12 labelcolor 2 align 1 maximum 0 textfont 4 textsize 12 textcolor 2
+          }
+          Fl_Value_Output out_B {
+            label B
+            xywh {820 295 33 24} labelsize 12 labelcolor 4 align 1 maximum 0 textfont 4 textsize 12 textcolor 4
+          }
+          Fl_Value_Output out_I {
+            label {Total pixel current [A]}
+            tooltip {Total pixel current} xywh {740 345 105 24} labelsize 12 align 5 maximum 0 textfont 4 textsize 12
+          }
+          Fl_Value_Output out_Ix {
+            label {X pixel current [A]}
+            tooltip {Horizontal pixel current} xywh {740 385 105 24} labelsize 12 labelcolor 59 align 5 maximum 0 textfont 4 textsize 12
+          }
+          Fl_Value_Output out_Iy {
+            label {Y pixel current [A]}
+            tooltip {Vertical pixel current} xywh {740 425 105 24} labelsize 12 labelcolor 1 align 5 maximum 0 textfont 4 textsize 12
+          }
+          Fl_Box {} {
+            xywh {740 500 120 130} labeltype NO_LABEL resizable
+          }
+          Fl_Value_Output out_V {
+            label {Pixel voltage [V]}
+            tooltip {Pixel voltage} xywh {740 465 105 24} labelsize 12 align 5 maximum 0 textfont 4 textsize 12
+          }
+        }
+        Fl_Group current_density_plot_s {open
+          xywh {15 70 715 560} box DOWN_BOX resizable
+          class Fl_Image_Display
+        } {}
+      }
+    }
+  }
+} 
+
+Function {make_about_window()} {open
+} {
+  Fl_Window {} {
+    label {Plane Analysis}
+    xywh {529 257 240 349} type Double hide
+  } {
+    Fl_Box {} {
+      label {Copper Plane Analysis}
+      xywh {25 10 190 25}
+    }
+    Fl_Box {} {
+      label {Copyright 2007}
+      xywh {25 35 190 25}
+    }
+    Fl_Box {} {
+      label {Kirby Goulet}
+      xywh {25 61 190 25}
+    }
+    Fl_Box {} {
+      label {Tomislav Gotic}
+      xywh {25 86 190 25}
+    }
+    Fl_Box {} {
+      label VER_STRING
+      xywh {25 135 190 25}
+      code0 {o->label(VER_STRING);}
+    }
+    Fl_Box {} {
+      label {All Rights Reserved}
+      xywh {30 160 180 25} color 55
+    }
+    Fl_Box {} {
+      label {Uses:}
+      xywh {25 183 190 25}
+    }
+    Fl_Box fltk_version_box {
+      xywh {25 203 190 25}
+    }
+    Fl_Button about_close {
+      label CLOSE
+      callback {((Fl_Window*)(o->parent()))->hide();}
+      xywh {25 238 190 25} labelcolor 32
+    }
+    Fl_Box {} {
+      label {kgoulet@@ieee.org}
+      xywh {20 270 185 25}
+    }
+    Fl_Box {} {
+      label {tgotic@@gmail.com}
+      xywh {30 293 185 25}
+    }
+    Fl_Box {} {
+      label {ljohnson@@vanteon.com}
+      xywh {30 315 185 25}
+    }
+    Fl_Box {} {
+      label {Louis Johnson}
+      xywh {79 110 85 25}
+    }
+  }
+} 
+
+Function {make_config_window()} {open
+} {
+  Fl_Window {} {
+    label {Configuration Settings}
+    xywh {428 204 542 410} type Double hide modal
+  } {
+    Fl_Tabs {} {open
+      xywh {25 25 495 315} align 2
+    } {
+      Fl_Group {} {
+        label {Panel 1} open
+        xywh {40 55 460 270}
+      } {
+        Fl_Box {} {
+          label {Future Expansion}
+          xywh {135 120 20 25} labelfont 1
+        }
+        Fl_Value_Input pixel_x_umeters {
+          label {Pixel x dimension}
+          xywh {210 171 65 24} maximum 10000 step 0.01 value 10
+        }
+        Fl_Value_Input pixel_y_umeters {
+          label {Pixel y dimension}
+          xywh {210 201 65 23} maximum 10000 step 0.01 value 10
+        }
+        Fl_Box {} {
+          label {Dimensions in micrometers.  Non-square untested.}
+          xywh {325 174 135 47} align 149
+        }
+      }
+    }
+    Fl_Group {} {open
+      xywh {295 174 30 16}
+    } {}
+    Fl_Button {} {
+      label {Close Panel}
+      callback {((Fl_Window*)(o->parent()))->hide();}
+      xywh {390 360 125 25}
+    }
+  }
+} 
+
+Function {make_edit_source_window()} {open
+} {
+  Fl_Window {} {
+    label {Source Color}
+    xywh {409 493 209 185} type Double hide non_modal
+  } {
+    Fl_Box {} {
+      label {Current Source Definition}
+      xywh {30 13 140 27}
+    }
+    Fl_Value_Input r_source_d {
+      label RED
+      callback {{
+uchar r,g,b;
+Fl::get_color( box_source->color() ,r , g , b);
+r=o->value();
+box_source->color( fl_rgb_color ( r , g , b ));
+sync_color2dec();
+input_panel->redraw();
+}}
+      xywh {45 81 40 24} labelsize 12 align 5 maximum 255 step 1
+    }
+    Fl_Output r_source_h {
+      xywh {45 111 40 24} align 0
+    }
+    Fl_Box {} {
+      label Dec
+      xywh {5 80 40 27}
+    }
+    Fl_Box {} {
+      label Hex
+      xywh {5 109 40 27}
+    }
+    Fl_Value_Input g_source_d {
+      label GREEN
+      callback {{
+uchar r,g,b;
+Fl::get_color( box_source->color() ,r , g , b);
+g=o->value();
+box_source->color( fl_rgb_color ( r , g , b ));
+sync_color2dec();
+input_panel->redraw();
+}}
+      xywh {90 81 40 24} labelsize 12 align 5 maximum 255 step 1 value 255
+    }
+    Fl_Output g_source_h {
+      xywh {90 111 40 24} align 0
+    }
+    Fl_Value_Input b_source_d {
+      label BLUE
+      callback {{
+uchar r,g,b;
+Fl::get_color( box_source->color() ,r , g , b);
+b=o->value();
+box_source->color( fl_rgb_color ( r , g , b ));
+sync_color2dec();
+input_panel->redraw();
+}}
+      xywh {135 81 40 24} labelsize 12 align 5 maximum 255 step 1
+    }
+    Fl_Output b_source_h {
+      xywh {135 111 40 24} align 0
+    }
+  }
+} 
+
+Function {make_edit_sink_window()} {open
+} {
+  Fl_Window {} {
+    label {Sink Color}
+    xywh {488 456 209 208} type Double hide non_modal
+  } {
+    Fl_Box {} {
+      label {Current Sink Definition}
+      xywh {30 13 140 27}
+    }
+    Fl_Value_Input r_sink_d {
+      label RED
+      callback {{
+uchar r,g,b;
+Fl::get_color( box_sink->color() ,r , g , b);
+r=o->value();
+box_sink->color( fl_rgb_color ( r , g , b ));
+sync_color2dec();
+input_panel->redraw();
+}}
+      xywh {50 86 40 24} labelsize 12 align 5 maximum 255 step 1
+    }
+    Fl_Output r_sink_h {
+      xywh {50 116 40 24} align 0
+    }
+    Fl_Box {} {
+      label Dec
+      xywh {5 85 40 27}
+    }
+    Fl_Box {} {
+      label Hex
+      xywh {5 115 40 27}
+    }
+    Fl_Value_Input g_sink_d {
+      label GREEN
+      callback {{
+uchar r,g,b;
+Fl::get_color( box_sink->color() ,r , g , b);
+g=o->value();
+box_sink->color( fl_rgb_color ( r , g , b ));
+sync_color2dec();
+input_panel->redraw();
+}}
+      xywh {95 86 40 24} labelsize 12 align 5 maximum 255 step 1
+    }
+    Fl_Output g_sink_h {
+      xywh {95 116 40 24} align 0
+    }
+    Fl_Value_Input b_sink_d {
+      label BLUE
+      callback {{
+uchar r,g,b;
+Fl::get_color( box_sink->color() ,r , g , b);
+b=o->value();
+box_sink->color( fl_rgb_color ( r , g , b ));
+sync_color2dec();
+input_panel->redraw();
+}}
+      xywh {140 86 40 24} labelsize 12 align 5 maximum 255 step 1 value 255
+    }
+    Fl_Output b_sink_h {
+      xywh {140 116 40 24} align 0
+    }
+  }
+} 
+
+Function {make_edit_substr_window()} {open
+} {
+  Fl_Window {} {
+    label {Substrate Color}
+    xywh {498 466 209 221} type Double hide non_modal
+  } {
+    Fl_Box {} {
+      label {Substrate Definition}
+      xywh {30 13 140 27}
+    }
+    Fl_Value_Input r_substrate_d {
+      label RED
+      callback {{
+uchar r,g,b;
+Fl::get_color( box_substrate->color() ,r , g , b);
+r=o->value();
+box_substrate->color( fl_rgb_color ( r , g , b ));
+sync_color2dec();
+input_panel->redraw();
+}}
+      xywh {56 81 40 24} labelsize 12 align 5 maximum 255 step 1
+    }
+    Fl_Output r_substrate_h {
+      xywh {56 111 40 24} align 0
+    }
+    Fl_Box {} {
+      label Dec
+      xywh {16 81 40 27}
+    }
+    Fl_Box {} {
+      label Hex
+      xywh {16 110 40 27}
+    }
+    Fl_Value_Input g_substrate_d {
+      label GREEN
+      callback {{
+uchar r,g,b;
+Fl::get_color( box_substrate->color() ,r , g , b);
+g=o->value();
+box_substrate->color( fl_rgb_color ( r , g , b ));
+sync_color2dec();
+input_panel->redraw();
+}}
+      xywh {101 81 40 24} labelsize 12 align 5 maximum 255 step 1
+    }
+    Fl_Output g_substrate_h {
+      xywh {101 111 40 24} align 0
+    }
+    Fl_Value_Input b_substrate_d {
+      label BLUE
+      callback {{
+uchar r,g,b;
+Fl::get_color( box_substrate->color() ,r , g , b);
+b=o->value();
+box_substrate->color( fl_rgb_color ( r , g , b ));
+sync_color2dec();
+input_panel->redraw();
+}}
+      xywh {146 81 40 24} labelsize 12 align 5 maximum 255 step 1
+    }
+    Fl_Output b_substrate_h {
+      xywh {146 111 40 24} align 0
+    }
+  }
+} 
+
+Function {make_edit_m1_window()} {open
+} {
+  Fl_Window panel_material1 {
+    label {Material 1 Definition}
+    xywh {518 407 209 202} type Double hide non_modal
+  } {
+    Fl_Box {} {
+      label {Material 1 Definition}
+      xywh {30 13 140 27}
+    }
+    Fl_Value_Input r_material1_d {
+      label RED
+      callback {{
+uchar r,g,b;
+Fl::get_color( box_material1->color() ,r , g , b);
+r=o->value();
+box_material1->color( fl_rgb_color ( r , g , b ));
+sync_color2dec();
+input_panel->redraw();
+}}
+      xywh {50 71 40 24} labelsize 12 align 5 maximum 255 step 1
+    }
+    Fl_Output r_material1_h {
+      xywh {50 101 40 24} align 0
+    }
+    Fl_Box {} {
+      label Dec
+      xywh {5 70 40 27}
+    }
+    Fl_Box {} {
+      label Hex
+      xywh {5 99 40 27}
+    }
+    Fl_Value_Input g_material1_d {
+      label GREEN
+      callback {{
+uchar r,g,b;
+Fl::get_color( box_material1->color() ,r , g , b);
+g=o->value();
+box_material1->color( fl_rgb_color ( r , g , b ));
+sync_color2dec();
+input_panel->redraw();
+}}
+      xywh {100 71 40 24} labelsize 12 align 5 maximum 255 step 1
+    }
+    Fl_Output g_material1_h {
+      xywh {100 101 40 24} align 0
+    }
+    Fl_Value_Input b_material1_d {
+      label BLUE
+      callback {{
+uchar r,g,b;
+Fl::get_color( box_material1->color() ,r , g , b);
+b=o->value();
+box_material1->color( fl_rgb_color ( r , g , b ));
+sync_color2dec();
+input_panel->redraw();
+}}
+      xywh {150 71 40 24} labelsize 12 align 5 maximum 255 step 1
+    }
+    Fl_Output b_material1_h {
+      xywh {150 101 40 24} align 0
+    }
+    Fl_Value_Input conductance_m1 {
+      label Conductivity
+      callback {cb_conductance_m1_changed( (Fl_Value_Input*)o);}
+      xywh {105 146 70 24}
+    }
+    Fl_Box {} {
+      label {MS/m}
+      xywh {105 170 50 21}
+    }
+  }
+} 
+
+Function {make_edit_additional_window()} {open
+} {
+  Fl_Window {} {
+    label {Additional Materials}
+    xywh {704 104 213 605} type Double hide non_modal
+  } {
+    Fl_Box {} {
+      label {Material 4 Definition}
+      xywh {10 420 185 144} box THIN_UP_FRAME align 5
+    }
+    Fl_Value_Input r_material4_d {
+      label RED
+      callback {{
+uchar r,g,b;
+Fl::get_color( box_material4->color() ,r , g , b);
+r=o->value();
+box_material4->color( fl_rgb_color ( r , g , b ));
+sync_color2dec();
+input_panel->redraw();
+}}
+      xywh {51 440 40 24} labelsize 12 align 5 maximum 255 step 1
+    }
+    Fl_Output r_material4_h {
+      xywh {51 470 40 24} align 0
+    }
+    Fl_Box {} {
+      label Dec
+      xywh {9 439 40 27}
+    }
+    Fl_Box {} {
+      label Hex
+      xywh {9 469 40 27}
+    }
+    Fl_Value_Input g_material4_d {
+      label GREEN
+      callback {{
+uchar r,g,b;
+Fl::get_color( box_material4->color() ,r , g , b);
+g=o->value();
+box_material4->color( fl_rgb_color ( r , g , b ));
+sync_color2dec();
+input_panel->redraw();
+}}
+      xywh {100 440 40 24} labelsize 12 align 5 maximum 255 step 1
+    }
+    Fl_Output g_material4_h {
+      xywh {100 470 40 24} align 0
+    }
+    Fl_Value_Input b_material4_d {
+      label BLUE
+      callback {{
+uchar r,g,b;
+Fl::get_color( box_material4->color() ,r , g , b);
+b=o->value();
+box_material4->color( fl_rgb_color ( r , g , b ));
+sync_color2dec();
+input_panel->redraw();
+}}
+      xywh {149 440 40 24} labelsize 12 align 5 maximum 255 step 1
+    }
+    Fl_Output b_material4_h {
+      xywh {149 470 40 24} align 0
+    }
+    Fl_Value_Input conductance_m4 {
+      label Conductivity
+      callback {cb_conductance_m4_changed( (Fl_Value_Input*)o);}
+      xywh {100 535 70 22}
+    }
+    Fl_Box {} {
+      label {Material 3 Definition}
+      xywh {10 245 185 149} box THIN_UP_FRAME align 5
+    }
+    Fl_Value_Input r_material3_d {
+      label RED
+      callback {{
+uchar r,g,b;
+Fl::get_color( box_material3->color() ,r , g , b);
+r=o->value();
+box_material3->color( fl_rgb_color ( r , g , b ));
+sync_color2dec();
+input_panel->redraw();
+}}
+      xywh {51 268 40 24} labelsize 12 align 5 maximum 255 step 1
+    }
+    Fl_Output r_material3_h {
+      xywh {51 298 40 24} align 0
+    }
+    Fl_Box {} {
+      label Dec
+      xywh {10 267 40 27}
+    }
+    Fl_Box {} {
+      label Hex
+      xywh {10 297 40 27}
+    }
+    Fl_Value_Input g_material3_d {
+      label GREEN
+      callback {{
+uchar r,g,b;
+Fl::get_color( box_material3->color() ,r , g , b);
+g=o->value();
+box_material3->color( fl_rgb_color ( r , g , b ));
+sync_color2dec();
+input_panel->redraw();
+}}
+      xywh {101 268 40 24} labelsize 12 align 5 maximum 255 step 1
+    }
+    Fl_Output g_material3_h {
+      xywh {101 298 40 24} align 0
+    }
+    Fl_Value_Input b_material3_d {
+      label BLUE
+      callback {{
+uchar r,g,b;
+Fl::get_color( box_material3->color() ,r , g , b);
+b=o->value();
+box_material3->color( fl_rgb_color ( r , g , b ));
+sync_color2dec();
+input_panel->redraw();
+}}
+      xywh {149 268 40 24} labelsize 12 align 5 maximum 255 step 1
+    }
+    Fl_Output b_material3_h {
+      xywh {149 298 40 24} align 0
+    }
+    Fl_Value_Input conductance_m3 {
+      label Conductivity
+      callback {cb_conductance_m3_changed( (Fl_Value_Input*)o);}
+      xywh {110 364 70 25}
+    }
+    Fl_Box {} {
+      label {Material 2 Definition}
+      xywh {15 55 185 154} box THIN_UP_FRAME align 5
+    }
+    Fl_Value_Input r_material2_d {
+      label RED
+      callback {{
+uchar r,g,b;
+Fl::get_color( box_material2->color() ,r , g , b);
+r=o->value();
+box_material2->color( fl_rgb_color ( r , g , b ));
+sync_color2dec();
+input_panel->redraw();
+}}
+      xywh {50 78 40 24} labelsize 12 align 5 maximum 255 step 1
+    }
+    Fl_Output r_material2_h {
+      xywh {51 106 40 26} align 0
+    }
+    Fl_Box {} {
+      label Dec
+      xywh {14 77 40 27}
+    }
+    Fl_Box {} {
+      label Hex
+      xywh {12 106 40 27}
+    }
+    Fl_Value_Input g_material2_d {
+      label GREEN
+      callback {{
+uchar r,g,b;
+Fl::get_color( box_material2->color() ,r , g , b);
+g=o->value();
+box_material2->color( fl_rgb_color ( r , g , b ));
+sync_color2dec();
+input_panel->redraw();
+}}
+      xywh {100 78 40 24} labelsize 12 align 5 maximum 255 step 1
+    }
+    Fl_Output g_material2_h {
+      xywh {101 106 40 24} align 0
+    }
+    Fl_Value_Input b_material2_d {
+      label BLUE
+      callback {{
+uchar r,g,b;
+Fl::get_color( box_material2->color() ,r , g , b);
+b=o->value();
+box_material2->color( fl_rgb_color ( r , g , b ));
+sync_color2dec();
+input_panel->redraw();
+}}
+      xywh {150 78 40 24} labelsize 12 align 5 maximum 255 step 1
+    }
+    Fl_Output b_material2_h {
+      xywh {149 106 40 24} align 0
+    }
+    Fl_Value_Input conductance_m2 {
+      label Conductivity
+      callback {cb_conductance_m2_changed( (Fl_Value_Input*)o);}
+      xywh {115 179 70 25}
+    }
+    Fl_Button {} {
+      label Close
+      callback {additional_edit_window->hide();}
+      xywh {130 575 64 20}
+    }
+    Fl_Choice choice_material_4 {
+      label Material
+      callback {cb_metal_chosen((Fl_Choice*)o);
+box_material4->tooltip(o->text());} open
+      xywh {15 510 175 20} down_box BORDER_BOX align 5
+      code0 {o->menu(menu_choice_material);}
+      code1 {o->value(5); // Index into copper}
+    } {}
+    Fl_Choice choice_material_3 {
+      label Material
+      callback {cb_metal_chosen((Fl_Choice*)o);
+box_material3->tooltip(o->text());} open
+      xywh {15 340 175 20} down_box BORDER_BOX align 5
+      code0 {o->menu(menu_choice_material);}
+      code1 {o->value(5); // Index into copper}
+    } {}
+    Fl_Choice choice_material_2 {
+      label Material
+      callback {cb_metal_chosen((Fl_Choice*)o);
+box_material2->tooltip(o->text());} open
+      xywh {20 155 175 20} down_box BORDER_BOX align 5
+      code0 {o->menu(menu_choice_material);}
+      code1 {o->value(5); // Index into copper}
+    } {}
+    Fl_Box {} {
+      label {Conductivity in MS/m}
+      xywh {90 9 50 21}
+    }
+  }
+} 
+
+decl {Fl_Double_Window* config_window;} {public
+} 
+
+decl {Fl_Double_Window* about_window;} {public
+} 
+
+decl {Fl_Double_Window* main_window;} {public
+} 
+
+decl {Fl_Double_Window* source_edit_window;} {public
+} 
+
+decl {Fl_Double_Window* sink_edit_window;} {public
+} 
+
+decl {Fl_Double_Window* substrate_edit_window;} {public
+} 
+
+decl {Fl_Double_Window* material1_edit_window;} {public
+} 
+
+decl {Fl_Double_Window* additional_edit_window;} {public
+} 

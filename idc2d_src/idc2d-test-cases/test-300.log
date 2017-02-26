@@ -1,0 +1,131 @@
+-----------------------------------
+Copper Plane Current Analysis Program
+Version 0.3.0.1
+Time: Fri Jan 25 07:12:56 2008
+GPL Version 2.0
+-----------------------------------
+Number of processors: 2
+Max number of OMP threads: 2
+-----------------------------------
+Reading image:
+C:/Dev-Cpp/development/idc2d_src_0_2_3_1214/idc2d_src_0_2_3_1214/idc2d-test-cases/test-sinter.bmp
+Image extents in pixels: 500 wide x 120 high
+Allocating memory...
+Image check:
+  Source pixel count  = 5500
+  Sink pixel count    = 5000
+  FR-4 pixel count    = 6380
+  Metal 1 pixel count = 7251
+  Metal 2 pixel count = 14325
+  Metal 3 pixel count = 9794
+  Metal 4 pixel count = 11750
+  Unknown pixel count = 0
+Number of threads: 2
+Simulation parameters:
+  Max. iterations           = 10000
+  Cutoff                    = 1e-016
+  Pixel dimensions          = 1000 x 1000 µm (39.3701 x 39.3701 mil)
+  Image dimensions          = 500 x 120 mm (19.685 x 4.72441 in)
+  Layer thickness           = 34.0571 µm (1.34083 mil)
+  Source voltage            = 0.1 V
+  Metal 1 pixel conductance = 2010.45,2010.45 S
+  Metal 2 pixel conductance = 2089.39,2089.39 S
+  Metal 3 pixel conductance = 1548.05,1548.05 S
+  Metal 4 pixel conductance = 270.294,270.294 S
+  Total iteration count     = 1256
+
+  Total supply current      =       264.8679  A
+  Effective DC resistance   =   0.0003775468  Ohms
+  Maximal pixel current     =       9.291426  A
+  Minimum pixel current     =              0  A
+  Max pixel current (X)     =       5.317573  A
+  Min pixel current (X)     =              0  A
+  Max pixel current (Y)     =       9.291426  A
+  Min pixel current (Y)     =              0  A
+Finished in 3.593750 s
+-----------------------------------
+Number of threads: 2
+Simulation parameters:
+  Max. iterations           = 10000
+  Cutoff                    = 1e-016
+  Pixel dimensions          = 1000 x 1000 µm (39.3701 x 39.3701 mil)
+  Image dimensions          = 500 x 120 mm (19.685 x 4.72441 in)
+  Layer thickness           = 34.0571 µm (1.34083 mil)
+  Source voltage            = 0.1 V
+  Metal 1 pixel conductance = 2029.8,2029.8 S
+  Metal 2 pixel conductance = 2145.6,2145.6 S
+  Metal 3 pixel conductance = 1539.38,1539.38 S
+  Metal 4 pixel conductance = 234.653,234.653 S
+  Total iteration count     = 1261
+
+  Total supply current      =       250.4724  A
+  Effective DC resistance   =   0.0003992457  Ohms
+  Maximal pixel current     =        9.32019  A
+  Minimum pixel current     =              0  A
+  Max pixel current (X)     =       5.499191  A
+  Min pixel current (X)     =              0  A
+  Max pixel current (Y)     =        9.30593  A
+  Min pixel current (Y)     =              0  A
+Finished in 3.593750 s
+-----------------------------------
+Reading image:
+C:/Dev-Cpp/development/idc2d_src_0_2_3_1214/idc2d_src_0_2_3_1214/idc2d-test-cases/test300x400.bmp
+Image extents in pixels: 400 wide x 300 high
+Allocating memory...
+Image check:
+  Source pixel count  = 1582
+  Sink pixel count    = 1254
+  FR-4 pixel count    = 18642
+  Metal 1 pixel count = 98522
+  Metal 2 pixel count = 0
+  Metal 3 pixel count = 0
+  Metal 4 pixel count = 0
+  Unknown pixel count = 0
+Number of threads: 2
+Simulation parameters:
+  Max. iterations           = 10000
+  Cutoff                    = 1e-016
+  Pixel dimensions          = 1000 x 1000 µm (39.3701 x 39.3701 mil)
+  Image dimensions          = 400 x 300 mm (15.748 x 11.811 in)
+  Layer thickness           = 34.0571 µm (1.34083 mil)
+  Source voltage            = 0.1 V
+  Metal 1 pixel conductance = 2029.8,2029.8 S
+  Metal 2 pixel conductance = 2145.6,2145.6 S
+  Metal 3 pixel conductance = 1539.38,1539.38 S
+  Metal 4 pixel conductance = 234.653,234.653 S
+  Total iteration count     = 1487
+
+  Total supply current      =       187.5342  A
+  Effective DC resistance   =    0.000533236  Ohms
+  Maximal pixel current     =       6.459887  A
+  Minimum pixel current     =  6.201755e-009  A
+  Max pixel current (X)     =       4.425781  A
+  Min pixel current (X)     =              0  A
+  Max pixel current (Y)     =       6.454071  A
+  Min pixel current (Y)     =  6.201755e-009  A
+Finished in 10.031250 s
+-----------------------------------
+Number of threads: 1
+Simulation parameters:
+  Max. iterations           = 10000
+  Cutoff                    = 1e-016
+  Pixel dimensions          = 1000 x 1000 µm (39.3701 x 39.3701 mil)
+  Image dimensions          = 400 x 300 mm (15.748 x 11.811 in)
+  Layer thickness           = 34.0571 µm (1.34083 mil)
+  Source voltage            = 0.1 V
+  Metal 1 pixel conductance = 2029.8,2029.8 S
+  Metal 2 pixel conductance = 2145.6,2145.6 S
+  Metal 3 pixel conductance = 1539.38,1539.38 S
+  Metal 4 pixel conductance = 234.653,234.653 S
+  Total iteration count     = 1487
+
+  Total supply current      =       187.5342  A
+  Effective DC resistance   =    0.000533236  Ohms
+  Maximal pixel current     =       6.459887  A
+  Minimum pixel current     =  6.201529e-009  A
+  Max pixel current (X)     =       4.425781  A
+  Min pixel current (X)     =              0  A
+  Max pixel current (Y)     =       6.454071  A
+  Min pixel current (Y)     =  6.201529e-009  A
+Finished in 14.203125 s
+-----------------------------------
